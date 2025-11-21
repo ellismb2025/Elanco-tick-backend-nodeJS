@@ -22,7 +22,7 @@ This is a Node.js/Express API for tracking tick sightings, created for the Elanc
 In terminal
    ```bash
       cd Elanco-tick-backend-nodeJS
-      
+      cd user-api  
    ```
 
 ### 3. Install Dependincies:
