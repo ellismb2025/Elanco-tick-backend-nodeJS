@@ -1,0 +1,25 @@
+{
+  "name": "user-api",
+  "version": "1.0.0",
+  "main": "index.js",
+"scripts": {
+  "start": "node app.js",
+  "menu": "node menu.js",
+  "dev": "concurrently --raw \"npm run start\" \"npm run menu\"" 
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "sequelize": "^6.37.7",
+    "sqlite3": "^5.1.7",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
