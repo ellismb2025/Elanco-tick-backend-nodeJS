@@ -27,7 +27,7 @@ In terminal
 
 ### 3. Install Dependincies:
    ```bash
-      npm install
+      npm install 
    ```
 
 ### 4. Populate the Database:
