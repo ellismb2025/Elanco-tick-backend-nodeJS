@@ -97,7 +97,7 @@ function askForCity() {
 
     // function to print the URL and ask to return
     function printResult(url) {
-        console.log("\nCopy this URL:");
+        console.log("\nCopy this URL or CTRL+Click:");
         console.log(url);
         console.log("-----------------------------");
 
