@@ -26,13 +26,9 @@ setTimeout(function() {
 
     // Handle the logic separately so we can loop back
     function handleOption(option) {
-        if (option === '1') {
-            // Location Filter
-            rl.question('Enter city name: ', function(city) {
-                // Capitalize the first letter
-                const formattedCity = city.charAt(0).toUpperCase() + city.slice(1).toLowerCase();
-                printResult("http://localhost:3000/ticks/location/" + formattedCity);
-            });
+          if (option === '1') {
+            //Validation Function ---
+            askForCity();
 
         } else if (option === '2') {
             // Date Range Filter
@@ -66,7 +62,40 @@ setTimeout(function() {
         }
     }
 
-    // Helper function to print the URL and ask to return
+    
+function askForCity() {
+        // Define valid cities
+        const validCities = [
+            "manchester", "london", "glasgow", "birmingham", 
+            "southampton", "nottingham", "sheffield", "liverpool", 
+            "edinburgh", "newcastle", "leicester", "bristol", 
+            "cardiff", "leeds"
+        ];
+
+        rl.question('Enter city name: ', function(input) {
+            const cityLower = input.trim().toLowerCase();
+
+            // Check if input is in the list
+            if (validCities.includes(cityLower)) {
+                // Valid City
+                const formattedCity = cityLower.charAt(0).toUpperCase() + cityLower.slice(1);
+                printResult("http://localhost:3000/ticks/location/" + formattedCity);
+            } else {
+                // Invalid City
+                console.log("\nSorry, that city isn't part of the list.");
+                console.log("Accepted cities: " + validCities.join(", "));
+                console.log("Try again (or type 'menu' to go back).\n");
+                
+                if (cityLower === 'menu') {
+                    showMainMenu();
+                } else {
+                    askForCity(); //Runs this function again
+                }
+            }
+        });
+    }
+
+    // function to print the URL and ask to return
     function printResult(url) {
         console.log("\nCopy this URL:");
         console.log(url);
