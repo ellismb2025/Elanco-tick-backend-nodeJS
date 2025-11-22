@@ -3,70 +3,81 @@ const readline = require('readline');
 // Wait 2.5 seconds so the server logs don't mess up the menu
 setTimeout(function() {
 
+    // Sets up the interface to read input from the keyboard and print output to the terminal
     const rl = readline.createInterface({
       input: process.stdin,
       output: process.stdout
     });
 
-    console.log("\n--- API URL Generator ---");
-    console.log("1. Filter by Location (e.g., London)");
-    console.log("2. Filter by Date Range (e.g., 2020 to 2022)");
-    console.log("3. Show All Data");
-    console.log("4. REPORT: Sightings per Region (Count)");
-    console.log("5. REPORT: Monthly Trends (Timeline)");
+    // Main function to show the menu again and again
+    function showMainMenu() {
+        console.log("\n--- API URL Generator ---");
+        console.log("1. Filter by Location (e.g., London)");
+        console.log("2. Filter by Date Range (e.g., 2020 to 2022)");
+        console.log("3. Show All Data");
+        console.log("4. REPORT: Sightings per Region (Count)");
+        console.log("5. REPORT: Monthly Trends (Timeline)");
+        console.log("6. Exit");
 
-    rl.question('Select an option (1-5): ', function(option) {
-
-      if (option === '1') {
-          // Location Filter
-          rl.question('Enter city name: ', function(city) {
-            // Capitalize the first letter
-            const formattedCity = city.charAt(0).toUpperCase() + city.slice(1).toLowerCase();
-            
-            console.log("\nCopy this URL:");
-            console.log("http://localhost:3000/ticks/location/" + formattedCity);
-            rl.close();
-            process.exit(0);
-          });
-
-      } else if (option === '2') {
-        // Date Range Filter
-        rl.question('Enter START date (YYYY-MM-DD): ', function(start) {
-          rl.question('Enter END date (YYYY-MM-DD): ', function(end) {
-            console.log("\nCopy this URL:");
-            console.log("http://localhost:3000/ticks/range/" + start + "/" + end);
-            rl.close();
-            process.exit(0);
-          });
+        rl.question('Select an option (1-6): ', function(option) {
+            handleOption(option);
         });
+    }
 
-      } else if (option === '3') {
-        // Show All
+    // Handle the logic separately so we can loop back
+    function handleOption(option) {
+        if (option === '1') {
+            // Location Filter
+            rl.question('Enter city name: ', function(city) {
+                // Capitalize the first letter
+                const formattedCity = city.charAt(0).toUpperCase() + city.slice(1).toLowerCase();
+                printResult("http://localhost:3000/ticks/location/" + formattedCity);
+            });
+
+        } else if (option === '2') {
+            // Date Range Filter
+            rl.question('Enter START date (YYYY-MM-DD): ', function(start) {
+                rl.question('Enter END date (YYYY-MM-DD): ', function(end) {
+                    printResult("http://localhost:3000/ticks/range/" + start + "/" + end);
+                });
+            });
+
+        } else if (option === '3') {
+            // Show All
+            printResult("http://localhost:3000/ticks");
+
+        } else if (option === '4') {
+            // REPORT: Region
+            printResult("http://localhost:3000/ticks/stats/by-location");
+
+        } else if (option === '5') {
+            // REPORT: Trends
+            printResult("http://localhost:3000/ticks/stats/monthly-trend");
+
+        } else if (option === '6') {
+            // Exit
+            console.log("Press CTRL+C to exit.");
+            rl.close();
+            process.exit(0);
+
+        } else {
+            console.log("Invalid option. Please try again.");
+            showMainMenu();
+        }
+    }
+
+    // Helper function to print the URL and ask to return
+    function printResult(url) {
         console.log("\nCopy this URL:");
-        console.log("http://localhost:3000/ticks");
-        rl.close();
-        process.exit(0);
+        console.log(url);
+        console.log("-----------------------------");
 
-      } else if (option === '4') {
-        // REPORT: Region
-        console.log("\nCopy this URL to see which cities have the most ticks:");
-        console.log("http://localhost:3000/ticks/stats/by-location");
-        rl.close();
-        process.exit(0);
+       rl.question('Press ENTER to return to the menu (Press Ctrl+C to exit)...', function(answer) {
+          showMainMenu();
+        });
+    }
 
-      } else if (option === '5') {
-        // REPORT: Trends
-        console.log("\nCopy this URL to see the timeline of sightings:");
-        console.log("\n(You can Ctrl+Click the link below)");
-        console.log("http://localhost:3000/ticks/stats/monthly-trend");
-        rl.close();
-        process.exit(0);
+    // Start the menu
+    showMainMenu();
 
-      } else {
-        console.log("Invalid option.");
-        rl.close();
-        process.exit(0);
-      }
-    });
-
-}, 2500);
+}, 1800);

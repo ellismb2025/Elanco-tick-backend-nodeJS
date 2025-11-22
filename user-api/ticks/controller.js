@@ -38,7 +38,7 @@ exports.getAllTicks = async (req, res) => {
 };
 
 
-// 3. Get Ticks by Location 
+// 3. Get Ticks by Location (Case Insensitive and error message if not found)
 exports.getTicksByLocation = async (req, res) => {
   try {
     const { locationName } = req.params;
@@ -49,6 +49,13 @@ exports.getTicksByLocation = async (req, res) => {
         locationName.toLowerCase()
       )
     });
+
+    if (ticks.length === 0) {
+        return res.status(404).json({ 
+            success: false, 
+            error: "Location not found. Please check the spelling and try again." 
+        });
+    }
 
     res.status(200).json({ success: true, count: ticks.length, data: ticks });
   } catch (err) {
