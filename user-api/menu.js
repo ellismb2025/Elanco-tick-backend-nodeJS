@@ -18,13 +18,16 @@ setTimeout(function() {
     rl.question('Select an option (1-5): ', function(option) {
 
       if (option === '1') {
-        // Location Filter
-        rl.question('Enter city name: ', function(city) {
-          console.log("\nCopy this URL:");
-          console.log("http://localhost:3000/ticks/location/" + city);
-          rl.close();
-          process.exit(0);
-        });
+          // Location Filter
+          rl.question('Enter city name: ', function(city) {
+            // Capitalize the first letter
+            const formattedCity = city.charAt(0).toUpperCase() + city.slice(1).toLowerCase();
+            
+            console.log("\nCopy this URL:");
+            console.log("http://localhost:3000/ticks/location/" + formattedCity);
+            rl.close();
+            process.exit(0);
+          });
 
       } else if (option === '2') {
         // Date Range Filter
@@ -54,6 +57,7 @@ setTimeout(function() {
       } else if (option === '5') {
         // REPORT: Trends
         console.log("\nCopy this URL to see the timeline of sightings:");
+        console.log("\n(You can Ctrl+Click the link below)");
         console.log("http://localhost:3000/ticks/stats/monthly-trend");
         rl.close();
         process.exit(0);

@@ -5,7 +5,7 @@ This is a Node.js/Express API for tracking tick sightings, created for the Elanc
 ## Features
 * **Menu -** Contains a menu in the terminal that allows the user to select what they want the program to do and gives links based on that.
 * **Advanced Filtering -** Filter data by **Location** and **Date Range** 
-* **Excel Intergration -** Automatically seeds the database from the spreadsheet.
+* **Excel Integration -** Automatically seeds the database from the spreadsheet.
 * **SQLite Database -** Uses SQLite database for persistent data storage 
 
 ## Prerequisites
@@ -18,14 +18,14 @@ This is a Node.js/Express API for tracking tick sightings, created for the Elanc
    git clone https://github.com/ellismb2025/Elanco-tick-backend-nodeJS.git
    ```
 
-### 2. Navigae the code:
+### 2. Navigate the code:
 In terminal
    ```bash
       cd Elanco-tick-backend-nodeJS
       cd user-api  
    ```
 
-### 3. Install Dependincies:
+### 3. Install Dependencies:
    ```bash
       npm install 
    ```

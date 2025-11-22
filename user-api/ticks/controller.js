@@ -37,11 +37,19 @@ exports.getAllTicks = async (req, res) => {
   }
 };
 
-// 3. Filter by Location
+
+// 3. Get Ticks by Location 
 exports.getTicksByLocation = async (req, res) => {
   try {
     const { locationName } = req.params;
-    const ticks = await Tick.findAll({ where: { location: locationName } });
+    
+    const ticks = await Tick.findAll({
+      where: sequelize.where(
+        sequelize.fn('lower', sequelize.col('location')), 
+        locationName.toLowerCase()
+      )
+    });
+
     res.status(200).json({ success: true, count: ticks.length, data: ticks });
   } catch (err) {
     res.status(500).json({ success: false, error: err.message });
