@@ -3,7 +3,7 @@
 This is a Node.js/Express API for tracking tick sightings, created for the Elanco technical task. It allows the user to filter tick sightings based on date and location. It also allows the user to see a report based on the count of ticks sighted in a location as well as the sightings per month.
 
 ## Features
-* **Menu -** Contains a menu in the terminal that allows the user to select what they want the program to do and gives links based on that.
+* **Menu -** Contains a menu in the terminal that allows the user to select what they want the program to do and gives links based on that. it runs both menu.js and app.js concurrently.
 * **Advanced Filtering -** Filter data by **Location** and **Date Range** 
 * **Excel Integration -** Automatically seeds the database from the spreadsheet.
 * **SQLite Database -** Uses SQLite database for persistent data storage 
