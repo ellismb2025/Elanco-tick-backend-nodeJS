@@ -51,3 +51,7 @@ In terminal
 | `GET` | `/ticks/stats/monthly-trend` | Timeline of sightings grouped by month|
 
 
+### Video link
+   ```bash
+      https://youtu.be/niFHoKsHAvs
+   ```
